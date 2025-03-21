@@ -1,1 +1,1 @@
-# sip_test_repository
+Current Objective: Set up streaming to separate device
