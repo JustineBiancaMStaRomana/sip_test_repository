@@ -1,0 +1,87 @@
+<!--NOT MY CODE-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+  font:
+    14px "Open Sans",
+    "Arial",
+    sans-serif;
+}
+
+video {
+  margin-top: 2px;
+  border: 1px solid black;
+}
+
+.button {
+  cursor: pointer;
+  display: block;
+  width: 160px;
+  border: 1px solid black;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  color: white;
+  background-color: darkgreen;
+  text-decoration: none;
+}
+
+h2 {
+  margin-bottom: 4px;
+}
+
+.left {
+  margin-right: 10px;
+  float: left;
+  width: 160px;
+  padding: 0px;
+}
+
+.right {
+  margin-left: 10px;
+  float: left;
+  width: 160px;
+  padding: 0px;
+}
+
+.bottom {
+  clear: both;
+  padding-top: 10px;
+}
+
+    </style>
+</head>
+
+<body>
+    <p>
+        Click the "Start Recording" button to begin video recording for a few seconds.
+        You can stop recording by clicking the "Stop Recording" button. The "Download"
+        button will download the received data (although it's in a raw, unwrapped form
+        that isn't very useful).
+      </p>
+      <br />
+      
+      <div class="left">
+        <div id="startButton" class="button">Start Recording</div>
+        <h2>Preview</h2>
+        <video id="preview" width="160" height="120" autoplay muted></video>
+      </div>
+      
+      <div class="right">
+        <div id="stopButton" class="button">Stop Recording</div>
+        <h2>Recording</h2>
+        <video id="recording" width="160" height="120" controls></video>
+        <a id="downloadButton" class="button">Download</a>
+      </div>
+      
+</body>
+<script src="cam.js"></script>
+
+</html>
+
+<!--NOT MY CODE-->
