@@ -1,1 +1,1 @@
-Current Objective: Set up streaming to separate device
+Current Objective: Set up streaming to separate device using Google API
