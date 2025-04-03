@@ -43,9 +43,9 @@ function mediaShow(){
         })
         .catch((error) => {
             if (error.name === "NotFoundError") {
-              console.log("Camera or microphone not found. Can't record.");
+              document.write("Camera or microphone not found. Can't record.");
             } else {
-              console.log(error);
+              document.write(error);
             }
           });
 }
