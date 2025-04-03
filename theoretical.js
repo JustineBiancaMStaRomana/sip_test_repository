@@ -33,7 +33,7 @@ function mediaShow(){
         })
         .then((stream) => {
             output.srcObject = stream;
-            output.captureStream = preview.captureStream || preview.mozCaptureStream;
+            output.captureStream = output.captureStream || output.mozCaptureStream;
             return new Promise((resolve) => (output.onplaying = resolve));
         })
         .then(() => recordStart(output.captureStream()))
