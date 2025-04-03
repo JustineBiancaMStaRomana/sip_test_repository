@@ -28,7 +28,7 @@ function recordStart(stream){
 function mediaShow(){
     navigator.mediaDevices
         .getUserMedia({
-            video: true,
+            video: {facingMode: 'environment'},
             audio: true,
         })
         .then((stream) => {
