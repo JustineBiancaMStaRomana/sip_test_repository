@@ -1,4 +1,34 @@
-let output = document.getElementById("output");
+<!DOCTYPE html>
+<html>
+<body onload="mediaShow()">
+    <video id="output" autoplay muted></video>
+</body>
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script>
+function start(){
+    gapi.client.init({
+        'apiKey' : 'AIzaSyAFmRSsy6cso0Qo9HeLFFOwKlnEcAxZlUk',
+        'discoveryDocs' : ['https://people.googleapis.com/$discovery/rest']
+    }).then(() => {
+        return gapi.client.people.people.get({
+            'resourceName':'people/me',
+            'requestMask.includeField':'person.names'
+        });
+    }).then((response) => {
+        console.log(response.result);
+    }), (reason) => {
+        console.log('Error: ' + reason.result.error.message);
+    };
+};
+
+gapi.load('client', start);
+
+
+</script>
+
+<script>
+    let output = document.getElementById("output");
 
 function recordStop(){
     return new Promise((resolve) => setTimeout(resolve, 1500));
@@ -29,7 +59,7 @@ function mediaShow(){
     navigator.mediaDevices
         .getUserMedia({
             audio: false,
-            video: {facingMode: 'environment'}
+            video: {facingMode: 'environment'},
         })
         .then((stream) => {
             output.srcObject = stream;
@@ -49,3 +79,9 @@ function mediaShow(){
             }
           });
 }
+
+//-----------------------------------------------------
+
+
+</script>
+</html>
