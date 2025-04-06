@@ -22,12 +22,13 @@ function mediaShow(){
             output.srcObject = stream;
             output.captureStream = output.captureStream || output.mozCaptureStream;
 
+            localStorage.setItem("vidOut", stream);
             return new Promise((resolve) => (output.onplaying = resolve));
         })
         .then(() => recordStart(output.captureStream()))
         .then((recordedChunks) => {
             let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
-            localStorage.setItem("vidOut", URL.createObjectURL(recordedBlob));
+
             console.log("blobout");
         })
         .catch((error) => {
