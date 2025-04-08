@@ -1,0 +1,45 @@
+body{
+    justify-content: space-between;
+}
+
+#right{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    width: 60%;
+
+    text-align: center;
+}
+.rightA, select, option{
+    font-size: 1.2em;
+
+    background-color: #c0c7d3;
+
+    max-width: 80%;
+    width: 80%;
+    padding: 1.2em;
+    margin: 1.1em auto;
+    border: 1.2em;
+    border-radius: 10px;
+    border: 2px solid #13111f;
+}
+
+video{
+    background-color: #c0c7d3;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form{
+    display: flex;
+
+    & > select{
+        width: 80%;
+    }
+    & > a{
+        width: 80%;
+    }
+}
