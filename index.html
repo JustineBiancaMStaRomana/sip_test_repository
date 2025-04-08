@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <video id="output" autoplay muted></video>
+    <button id="stopRec">Finish Recording</button>
+    <a id="download">Download Locally</a>
+    <a id="cloudUpload">Upload to Cloud</a></br>
+    
+    <select name="camRegister" id="camRegister">
+        <option value="cam1">Camera 1</option>
+        <option value="cam2">Camera 2</option>
+        <option value="cam3">Camera 3</option>
+        <option value="cam4">Camera 4</option> 
+    </select>
+    <button onclick="mediaShow(); registerCam()">Register</button>
+
+</body>
+<script>
+let output = document.getElementById("output");
+let downLoad = document.getElementById("download");
+let stopRec = document.getElementById("stopRec");
+let camRegister = document.getElementById("camRegister");
+let cloudUpload = document.getElementById("cloudUpload");
+
+function registerCam(){
+    switch(camRegister.value){
+        case "cam1": cloudUpload.href = "https://drive.google.com/drive/folders/192phen8Oiq-8LzVoTKM86C42vsBn8rhE?usp=sharing";
+        break;
+        case "cam2": cloudUpload.href = "https://drive.google.com/drive/folders/19rerGnUHCIhudq1nrILIEcsil8LWjnvu?usp=sharing";
+        break;
+        case "cam3": cloudUpload.href = "https://drive.google.com/drive/folders/1AAmB3P-SkwcyN6flUbOmdlHQVSm_Dux-?usp=sharing";
+        break;
+        case "cam4": cloudUpload.href = "https://drive.google.com/drive/folders/1wsHXw-OfG0qm6zzyfQwu5tCma6BqVTL3?usp=sharing";
+        break;
+    }
+}
+
+function recordStart(stream){
+    let recorder = new MediaRecorder(stream);
+    let data = [];
+
+    recorder.ondataavailable = (event) => data.push(event.data);
+    recorder.start();
+
+    let stopped = new Promise((resolve, reject) => {
+    recorder.onstop = resolve;
+    recorder.onerror = (event) => reject(event.name);
+  });
+
+    let recorded = stopRec.addEventListener("click", () => {
+        if(recorder.state === "recording"){
+            recorder.stop();
+            console.log("Recording Stopped - Download Available");
+        }
+    })
+
+    return Promise.all([stopped, recorded]).then(() => data);
+}
+
+function mediaShow(){
+    navigator.mediaDevices
+        .getUserMedia({
+            audio: false,
+            video: {facingMode: 'environment'},
+        })
+        .then((stream) => {
+            output.srcObject = stream;
+            downLoad.href = stream;
+            output.captureStream = output.captureStream || output.mozCaptureStream;
+            return new Promise((resolve) => (output.onplaying = resolve));
+        })
+        .then(() => recordStart(output.captureStream()))
+        .then((recordedChunks) => {
+            let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
+            downLoad.href = URL.createObjectURL(recordedBlob);
+            downLoad.download = "capture.webm";
+
+            mediaShow();
+        })
+        .catch((error) => {
+            if (error.name === "NotFoundError") {
+              document.write("Camera or microphone not found. Can't record.");
+            } else {
+              document.write(error);
+            }
+          });
+}
+</script>
+</html>
