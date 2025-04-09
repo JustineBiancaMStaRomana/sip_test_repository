@@ -33,7 +33,7 @@ video{
     margin-right: auto;
 }
 
-form{
+form, #updownload{
     display: flex;
 
     & > select{

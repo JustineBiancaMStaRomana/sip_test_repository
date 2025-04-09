@@ -20,6 +20,9 @@ a{
     text-decoration: none;
     color: #13111f;
 }
+a:hover{
+    cursor: pointer;
+}
 #left{
     display: flex;
     flex-direction: column;
