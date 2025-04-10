@@ -94,7 +94,7 @@ function mediaShow(){
             let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
             blobLink = URL.createObjectURL(recordedBlob);
             console.log(blobLink);
-            downLoad.href = URL.createObjectURL(recordedBlob);
+            downLoad.href = blobLink;
             downLoad.download = "capture.webm";
 
             mediaShow();
