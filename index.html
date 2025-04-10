@@ -94,7 +94,7 @@ function mediaShow(){
             downLoad.href = URL.createObjectURL(recordedBlob);
             downLoad.download = "capture.webm";
 
-            mediaShow();
+            downLoad.addEventListener("click", mediaShow())
         })
         .catch((error) => {
             if (error.name === "NotFoundError") {
