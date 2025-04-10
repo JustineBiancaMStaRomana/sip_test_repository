@@ -40,6 +40,7 @@ let downLoad = document.getElementById("download");
 let stopRec = document.getElementById("stopRec");
 let camRegister = document.getElementById("camRegister");
 let cloudUpload = document.getElementById("cloudUpload");
+var blobLink;
 
 function registerCam(){
     switch(camRegister.value){
@@ -91,7 +92,8 @@ function mediaShow(){
         .then(() => recordStart(output.captureStream()))
         .then((recordedChunks) => {
             let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
-            console.log(URL.createObjectURL(recordedBlob));
+            blobLink = URL.createObjectURL(recordedBlob);
+            console.log(blobLink);
             downLoad.href = URL.createObjectURL(recordedBlob);
             downLoad.download = "capture.webm";
 
