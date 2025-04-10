@@ -90,11 +90,9 @@ function mediaShow(){
         })
         .then(() => recordStart(output.captureStream()))
         .then((recordedChunks) => {
-            stopRec.addEventListener("click", () => {
-                let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
-                downLoad.href = URL.createObjectURL(recordedBlob);
-                downLoad.download = "capture.webm";
-            })
+            let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
+            downLoad.href = URL.createObjectURL(recordedBlob);
+            downLoad.download = "capture.webm";
 
             mediaShow();
         })
