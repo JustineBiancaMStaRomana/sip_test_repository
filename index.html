@@ -91,10 +91,11 @@ function mediaShow(){
         .then(() => recordStart(output.captureStream()))
         .then((recordedChunks) => {
             let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
+            console.log(URL.createObjectURL(recordedBlob));
             downLoad.href = URL.createObjectURL(recordedBlob);
             downLoad.download = "capture.webm";
 
-            downLoad.addEventListener("click", mediaShow())
+            mediaShow();
         })
         .catch((error) => {
             if (error.name === "NotFoundError") {
