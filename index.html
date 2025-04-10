@@ -85,16 +85,13 @@ function mediaShow(){
         })
         .then((stream) => {
             output.srcObject = stream;
-            downLoad.href = stream;
             output.captureStream = output.captureStream || output.mozCaptureStream;
             return new Promise((resolve) => (output.onplaying = resolve));
         })
         .then(() => recordStart(output.captureStream()))
         .then((recordedChunks) => {
             let recordedBlob = new Blob(recordedChunks, {type: "video/webm"});
-            blobLink = URL.createObjectURL(recordedBlob);
-            console.log(blobLink);
-            downLoad.href = blobLink;
+            downLoad.href = URL.createObjectURL(recordedBlob);
             downLoad.download = "capture.webm";
 
             mediaShow();
